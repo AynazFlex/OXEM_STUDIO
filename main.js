@@ -67,7 +67,6 @@ sliders.forEach((slider) => {
     const measurement = document.body.querySelector(slider.dataset.measurement);
   
     sliderBall.ontouchstart = (event) => {
-      event.preventDefault();
       const width = slider.getBoundingClientRect().width;
       const x_0 = slider.getBoundingClientRect().left;
       const k = (+max - +min) / (width - 20);
