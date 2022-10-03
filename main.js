@@ -13,7 +13,7 @@ sliders.forEach((slider) => {
   const max = slider.dataset.max;
   const measurement = document.body.querySelector(slider.dataset.measurement);
 
-  sliderBall.onpointerdown = (event) => {
+  sliderBall.onmousedown = (event) => {
     event.preventDefault();
     const width = slider.getBoundingClientRect().width;
     const x_0 = slider.getBoundingClientRect().left;
@@ -21,9 +21,7 @@ sliders.forEach((slider) => {
 
     const shiftX = event.clientX - sliderBall.getBoundingClientRect().left;
 
-    sliderBall.setPointerCapture(event.pointerId);
-
-    sliderBall.onpointermove = (event) => {
+    document.onmousemove = (event) => {
       const S = event.clientX - shiftX - x_0;
       const proportion = (S/width)*100;
       if (S <= 0) {
@@ -53,11 +51,64 @@ sliders.forEach((slider) => {
       }
       result();
     };
-    document.onpointerup = () => {
-      sliderBall.onpointermove = null;
-      document.onpointerup = null;
+    document.onmouseup = () => {
+      document.onmousemove = null;
+      document.onmouseup = null;
     };
   };
+});
+
+sliders.forEach((slider) => {
+    const sliderBall = slider.querySelector(".slider__ball");
+    const sliderLine = slider.querySelector(".slider__line");
+    const input = document.getElementById(slider.dataset.id);
+    const min = slider.dataset.min;
+    const max = slider.dataset.max;
+    const measurement = document.body.querySelector(slider.dataset.measurement);
+  
+    sliderBall.ontouchstart = (event) => {
+      event.preventDefault();
+      const width = slider.getBoundingClientRect().width;
+      const x_0 = slider.getBoundingClientRect().left;
+      const k = (+max - +min) / (width - 20);
+  
+      const shiftX = event.changedTouches[0].clientX - sliderBall.getBoundingClientRect().left;
+  
+      document.ontouchmove = (event) => {
+        const S = event.changedTouches[0].clientX - shiftX - x_0;
+        const proportion = (S/width)*100;
+        if (S <= 0) {
+          sliderBall.style.left = "0%";
+          sliderLine.style.width = "0%";
+          if (measurement) {
+            measurement.innerHTML = `${min}%`;
+          } else {
+            input.value = min;
+          }
+        } else if (S + 20 >= width) {
+          sliderBall.style.left = `${100*(width - 20)/width}%`;
+          sliderLine.style.width = `${100*(width - 20)/width}%`;
+          if (measurement) {
+            measurement.innerHTML = `${max}%`;
+          } else {
+            input.value = max;
+          }
+        } else {
+          sliderBall.style.left = `${proportion}%`;
+          sliderLine.style.width = `${proportion}%`;
+          if (measurement) {
+            measurement.innerHTML = `${Math.floor(k * S + +min)}%`;
+          } else {
+            input.value = Math.floor(k * S + +min);
+          }
+        }
+        result();
+      };
+      document.ontouchend = () => {
+        document.ontouchmove = null;
+        document.ontouchend = null;
+      };
+    };
 });
 
 function calculation() {
@@ -119,34 +170,4 @@ price.onchange = (e) => {
     
 }
 
-/*sliderBall.addEventListener("pointerdown", (e) => {
-    sliderBall.setPointerCapture(e.pointerId);
-    console.log(e.pointerId)
-    const width = slider.getBoundingClientRect().width;
-    const x_0 = slider.getBoundingClientRect().left;
-    document.onpointermove = (e) => {
-      e.preventDefault();
-      const S = e.clientX - slider.getBoundingClientRect().left;
-      if (S <= 0) {
-        sliderBall.style.left = "0px";
-        sliderLine.style.width = "0px";
-        input.value = 0;
-      } else if (S + 20 >= width) {
-        sliderBall.style.left = `${width - 20}px`;
-        sliderLine.style.width = "calc(100% - 20px)";
-        input.value = width - 20;
-      } else {
-        const d_x = e.clientX - x_0;
-        sliderBall.style.left = `${d_x}px`;
-        sliderLine.style.width = `${d_x}px`;
-        input.value = d_x;
-      }
-    };
-    document.addEventListener(
-      "pointerup",
-      () => {
-        document.onpointermove = null;
-      },
-      { once: true }
-    );
-  });*/
+
