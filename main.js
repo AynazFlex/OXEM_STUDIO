@@ -207,7 +207,7 @@ initial_payment.oninput = (e) => {
     if (+e.target.value <= 10) {
       sliderBall.style.left = "0%";
       sliderLine.style.width = "0%";
-      measurement.innerHTML = '0%'
+      measurement.innerHTML = '10%'
     }
     if (+e.target.value >= 60) {
       sliderBall.style.left = `${(100 * (width - 20)) / width}%`;
@@ -217,9 +217,13 @@ initial_payment.oninput = (e) => {
   };
 
 initial_payment.onblur = (e) => {
-    if(+e.target.value <= 10) initial_payment.value = (0.1 * parseInt(price.value)).toFixed(1) + ' ₽'
-    if(+e.target.value >= 60) initial_payment.value = (0.6 * parseInt(price.value)).toFixed(1) + ' ₽'
-    initial_payment.value = (+e.target.value * parseInt(price.value)).toFixed(1) + ' ₽'
+    if(+e.target.value <= 10) {
+      initial_payment.value = (0.1 * parseInt(price.value)).toFixed(1) + ' ₽'
+    } else if(+e.target.value >= 60) {
+      initial_payment.value = (0.6 * parseInt(price.value)).toFixed(1) + ' ₽'
+    } else {
+      initial_payment.value = (+e.target.value * parseInt(price.value)).toFixed(1) + ' ₽'
+    }
     result();
 }
 
