@@ -1,0 +1,346 @@
+@import './normalize.css';
+@import '../fonts/Nekst-Black/stylesheet.css';
+@import '../fonts/Gilroy/stylesheet.css';
+
+body {
+    font-family: 'Nekst-Black', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    padding: 213px 47px;
+}
+
+.form__input-items {
+    display: flex;
+    gap: 32px;
+}
+
+.title {
+    margin: 0 0 32px 0;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 54px;
+    line-height: 90%;
+}
+
+.form__item {
+    width: 427px;
+    color: #575757;
+}
+
+.form__item-label {
+    font-family: 'Gilroy', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.form__item-input-container {
+    margin-top: 24px;
+    background: #F3F3F4;
+    border-radius: 16px;
+    padding: 16px 24px 0 24px;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 36px;
+}
+
+.form__item-input {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.form__item-input>input {
+    display: block;
+    align-self: center;
+    font: inherit;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    padding: 0;
+    color: inherit
+}
+
+.slider {
+    position: relative;
+    height: 1px;
+    background: #E1E1E1;
+}
+
+.slider__line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0px;
+    height: 2px;
+    background: #FF9514;
+}
+
+.slider__ball {
+    position: absolute;
+    top: -10px;
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    background: #FF9514;
+    cursor: pointer;
+}
+
+.slider__ball:hover {
+    transform: scale(1.2)
+}
+
+.form__final-amount-submit {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    margin-top: 51px;
+}
+
+.form__amount-lease {
+    width: 427px;
+    color: #575757;
+}
+
+.form__amount-lease>h6 {
+    font-family: 'Gilroy', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: left;
+    padding: 0;
+    margin: 0 0 8px 0;
+}
+
+.form__amount-lease>div {
+    font-style: normal;
+    font-size: 54px;
+    font-weight: 900;
+    line-height: 49px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+
+.form__item-measurement_payment {
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 24px;
+    letter-spacing: 0em;
+    display: block;
+    padding: 15px 17px;
+    background: #EBEBEC;
+    border-radius: 16px;
+    align-self: center;
+}
+
+.form__item-input-container_payment {
+    padding: 7px 7px 0 24px !important;
+}
+
+.form__item-input_payment {
+    margin-bottom: 6px !important;
+}
+
+.form__slider_payment {
+    padding-right: 17px;
+}
+
+.form__submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 36px;
+    width: 427px;
+    color: #FFFFFF;
+    background: #FF9514;
+    border-radius: 40px;
+    padding: 14px 0 18px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.form__submit:hover {
+    background: #111111;
+}
+
+.form__submit:active {
+    background: #575757
+}
+
+.form__submit:disabled {
+    background: rgba(255, 149, 20, 0.4);
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.form__submit_anim {
+    display: block;
+    height: 30px;
+    animation: loading 1s linear infinite;
+}
+
+.form__item-input-container:focus-within {
+    background: white;
+    border: 2px solid #F3F3F4;
+}
+
+@media screen and (max-width: 1439px) {
+    .container {
+        padding: 100px 48px 120px;
+    }
+
+    .form__final-amount-submit {
+        margin-top: 44px
+    }
+
+    .title {
+        margin: 0 0 44px 0;
+    }
+
+    .form__input-items {
+        flex-direction: column;
+        gap: 39px;
+    }
+
+    .form__item {
+        width: 100%;
+    }
+
+    .form__amount-lease {
+        width: auto;
+        color: #333333;
+    }
+
+    .form__final-amount-submit {
+        flex-wrap: wrap;
+        gap: 44px 201px
+    }
+
+    .form__submit {
+        width: 345px;
+    }
+}
+
+@media screen and (max-width: 930px) {
+    .container {
+        padding: 64px 36px 174px;
+    }
+
+    .form__final-amount-submit {
+        flex-wrap: wrap;
+        gap: 44px 85px
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        padding: 44px 20px 64px;
+    }
+
+    .form__item {
+        color: #333E48;
+    }
+
+    .title {
+        font-size: 34px;
+        line-height: 31px;
+        margin: 0 0 32px 0;
+    }
+
+    .form__item-label {
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 0px;
+    }
+
+    .form__item-input-container {
+        margin-top: 8px;
+        font-size: 22px;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    .form__input-items {
+        gap: 25px;
+    }
+
+    .slider {
+        height: 2px;
+    }
+
+    .form__item-input-container_payment {
+        padding: 6px 6px 0 20px !important;
+    }
+
+    .form__item-input_payment {
+        margin-bottom: 4px !important;
+    }
+
+    .form__item-input {
+        margin-bottom: 18px;
+    }
+
+    .form__item-input-container {
+        padding: 20px 20px 0 20px;
+    }
+
+    .form__slider_payment {
+        padding-right: 12px;
+    }
+
+    .form__amount-lease>h6 {
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0px;
+        margin: 0 0 2px 0;
+    }
+
+    .form__final-amount-submit {
+        margin-top: 25px
+    }
+
+    .form__final-amount-submit {
+        flex-direction: column;
+        gap: 29px;
+    }
+
+    .form__submit {
+        width: 100%;
+        margin-top: 4px;
+        font-size: 22px;
+        font-weight: 900;
+        line-height: 20px;
+        padding: 18px 0 22px;
+    }
+
+    .form__submit_anim {
+        height: 22px;
+    }
+
+    .form__amount-lease>div {
+        font-size: 22px;
+        line-height: 20px;
+    }
+}
