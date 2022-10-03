@@ -122,7 +122,6 @@ submit.onclick = () => {
     initial: parseInt(initial_payment.value),
     months: limit.value,
   };
-  if (data.monthPay && data.sum && data.price && data.initial && data.months) {
     submit.innerHTML =
       '<img class="form__submit_anim" src="./img/Ellipse.svg" alt="">';
     submit.disabled = true;
@@ -142,9 +141,6 @@ submit.onclick = () => {
         submit.innerHTML = "Оставить заявку";
         submit.disabled = false;
       });
-  } else {
-    alert("Данные некорректны");
-  }
 };
 
 price.oninput = (e) => {
@@ -153,27 +149,32 @@ price.oninput = (e) => {
   const sliderBall = slider.querySelector(".slider__ball");
   const sliderLine = slider.querySelector(".slider__line");
   const width = slider.getBoundingClientRect().width;
-  if (+e.target.value >= 1000000 && +e.target.value <= 6000000) {
+  if (+e.target.value > 1000000 && +e.target.value < 6000000) {
     const min = slider.dataset.min;
     const max = slider.dataset.max;
     const proportion = ((parseInt(price.value) - +min) / (+max - +min)) * 100;
-    sliderBall.style.left = `calc(${proportion}% - 20px)`;
-    sliderLine.style.width = `calc(${proportion}% - 20px)`;
+    if(+e.target.value - 1000000 >= 6000000 - +e.target.value) {
+      sliderBall.style.left = `calc(${proportion}% - 20px)`;
+      sliderLine.style.width = `calc(${proportion}% - 20px)`;
+    } else {
+      sliderBall.style.left = `${proportion}%`;
+      sliderLine.style.width = `${proportion}%`;
+    }
     result();
   }
-  if (+e.target.value < 1000000) {
+  if (+e.target.value <= 1000000) {
     sliderBall.style.left = "0%";
     sliderLine.style.width = "0%";
   }
-  if (+e.target.value > 6000000) {
+  if (+e.target.value >= 6000000) {
     sliderBall.style.left = `${(100 * (width - 20)) / width}%`;
     sliderLine.style.width = `${(100 * (width - 20)) / width}%`;
   }
 };
 
 price.onblur = (e) => {
-    if(+e.target.value < 1000000) price.value = 1000000
-    if(+e.target.value > 6000000) price.value = 6000000
+    if(+e.target.value <= 1000000) price.value = 1000000
+    if(+e.target.value >= 6000000) price.value = 6000000
     result();
 }
 
@@ -190,20 +191,25 @@ initial_payment.oninput = (e) => {
     const sliderLine = slider.querySelector(".slider__line");
     const measurement = document.body.querySelector(slider.dataset.measurement);
     const width = slider.getBoundingClientRect().width;
-    if (+e.target.value >= 10 && +e.target.value <= 60) {
+    if (+e.target.value > 10 && +e.target.value < 60) {
         measurement.innerHTML = `${initial_payment.value}%`
       const min = slider.dataset.min;
       const max = slider.dataset.max;
       const proportion = ((parseInt(initial_payment.value) - +min) / (+max - +min)) * 100;
-      sliderBall.style.left = `calc(${proportion}% - 20px)`
-      sliderLine.style.width = `calc(${proportion}% - 20px)`
+      if(+e.target.value - 10 >= 60 - +e.target.value) {
+        sliderBall.style.left = `calc(${proportion}% - 20px)`;
+        sliderLine.style.width = `calc(${proportion}% - 20px)`;
+      } else {
+        sliderBall.style.left = `${proportion}%`;
+        sliderLine.style.width = `${proportion}%`;
+      }
     }
-    if (+e.target.value < 10) {
+    if (+e.target.value <= 10) {
       sliderBall.style.left = "0%";
       sliderLine.style.width = "0%";
       measurement.innerHTML = '0%'
     }
-    if (+e.target.value > 60) {
+    if (+e.target.value >= 60) {
       sliderBall.style.left = `${(100 * (width - 20)) / width}%`;
       sliderLine.style.width = `${(100 * (width - 20)) / width}%`;
       measurement.innerHTML = '60%'
@@ -211,8 +217,8 @@ initial_payment.oninput = (e) => {
   };
 
 initial_payment.onblur = (e) => {
-    if(+e.target.value < 10) initial_payment.value = (0.1 * parseInt(price.value)).toFixed(1) + ' ₽'
-    if(+e.target.value > 60) initial_payment.value = (0.6 * parseInt(price.value)).toFixed(1) + ' ₽'
+    if(+e.target.value <= 10) initial_payment.value = (0.1 * parseInt(price.value)).toFixed(1) + ' ₽'
+    if(+e.target.value >= 60) initial_payment.value = (0.6 * parseInt(price.value)).toFixed(1) + ' ₽'
     initial_payment.value = (+e.target.value * parseInt(price.value)).toFixed(1) + ' ₽'
     result();
 }
@@ -223,27 +229,32 @@ limit.oninput = (e) => {
   const sliderBall = slider.querySelector(".slider__ball");
   const sliderLine = slider.querySelector(".slider__line");
   const width = slider.getBoundingClientRect().width;
-  if (+e.target.value >= 1 && +e.target.value <= 60) {
+  if (+e.target.value > 1 && +e.target.value < 60) {
     const min = slider.dataset.min;
     const max = slider.dataset.max;
     const proportion = ((parseInt(limit.value) - +min) / (+max - +min)) * 100;
-    sliderBall.style.left = `calc(${proportion}% - 20px)`;
-    sliderLine.style.width = `calc(${proportion}% - 20px)`;
+    if(+e.target.value - 1 >= 60 - +e.target.value) {
+      sliderBall.style.left = `calc(${proportion}% - 20px)`;
+      sliderLine.style.width = `calc(${proportion}% - 20px)`;
+    } else {
+      sliderBall.style.left = `${proportion}%`;
+      sliderLine.style.width = `${proportion}%`;
+    }
     result();
   }
-  if (+e.target.value < 1) {
+  if (+e.target.value <= 1) {
     sliderBall.style.left = "0%";
     sliderLine.style.width = "0%";
   }
-  if (+e.target.value > 60) {
+  if (+e.target.value >= 60) {
     sliderBall.style.left = `${(100 * (width - 20)) / width}%`;
     sliderLine.style.width = `${(100 * (width - 20)) / width}%`;
   }
 };
 
 limit.onblur = (e) => {
-    if(+e.target.value < 1) limit.value = 1
-    if(+e.target.value > 60) limit.value = 60
+    if(+e.target.value <= 1) limit.value = 1
+    if(+e.target.value >= 60) limit.value = 60
     result();
 }
 
