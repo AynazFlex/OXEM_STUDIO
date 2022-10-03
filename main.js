@@ -128,13 +128,16 @@ submit.onclick = () => {
     fetch("https://eoj3r7f3r4ef6v4.m.pipedream.net", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json;charset=utf-8",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
       .then((res) => {
         if (res.ok) alert("Успешно отправлены данные");
-        else throw new Error(`Error ${res.status}`);
+        else {
+          console.log(res)
+          throw new Error(`Error ${res.status}`);
+        }
       })
       .catch((err) => alert(err.message))
       .finally(() => {
